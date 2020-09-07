@@ -1,41 +1,64 @@
 #include "Boards.h"
 
- Boards::Boards()
+Boards::Boards()
 {
-  Map = new char*[sizerow];
+  BattleBoard = new char*[sizerow];
   for (int i = 0; i < sizerow; i++)
   {
-    Map[i] = new char[sizecol];
+    BattleBoard[i] = new char*[sizecol];
   }
   for (int i = 0; i < sizerow; i++)
   {
     for (int j = 0; j < sizecol; j++)
     {
-      if (i == 1)
+      if (i == 0 && j == 0)
       {
-        Map[i][j] = "1";
+        BattleBoard[i][j] = "T";
       }
-      else if (j == 1)
+      else if (i == 0)
       {
-        Map[i][j] = "A"
+        BattleBoard[i][j] = "1";
+      }
+      else if (j == 0)
+      {
+        BattleBoard[i][j] = "A";
       }
       else
       {
-        Map[i][j] = "X";
+        BattleBoard[i][j] = "X";
       }
     }
   }
 }
 
+Boards::~Boards()
+{
+  for (int i = 0; i < sizerow; i++)
+  {
+    delete BattleBoard[i];
+  }
+  delete[] BattleBoard;
+}
+
 void Boards::print()
 {
   std::cout << "test Boards:" << "\n";
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < sizerow; i++)
   {
-    for (int j = 0; j < 10; j++)
+    for (int j = 0; j < sizecol; j++)
     {
-      std::cout << Map[i][j] << " ";
+      std::cout << BattleBoard[i][j] << " ";
     }
     std::cout << '\n';
   }
+}
+
+char Boards::getpointat(int row, int col)
+{
+  return(BattleBoard[row][col]);
+}
+
+void Boards::changepointat(int row, int col, char newpoint)
+{
+  BattleBoard[row][col] = newpoint;
 }
