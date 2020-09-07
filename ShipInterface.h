@@ -4,6 +4,11 @@
  * @brief Interface for the Ship class
  */
 
+#ifndef SHIPINTERFACE_H
+#define SHIPINTERFACE_H
+
+#include <string>
+
 class ShipInterface {
 	public:
 		/* Destructor */
@@ -33,6 +38,8 @@ class ShipInterface {
 		/**
 		 * @return the coordinates the Ship occupies
 		 */
-		virtual String getLocation()=0;
+		virtual std::string getLocation()=0;
 	
 };
+
+#endif
