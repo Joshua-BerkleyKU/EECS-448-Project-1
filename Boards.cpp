@@ -2,6 +2,8 @@
 
 Boards::Boards()
 {
+  char letters[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+  char nummbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
   BattleBoard = new char*[sizerow];
   for (int i = 0; i < sizerow; i++)
   {
@@ -17,11 +19,11 @@ Boards::Boards()
       }
       else if (i == 0)
       {
-        BattleBoard[i][j] = "1";
+        BattleBoard[i][j] = letters[j];
       }
       else if (j == 0)
       {
-        BattleBoard[i][j] = "A";
+        BattleBoard[i][j] = nummbers[i];
       }
       else
       {
