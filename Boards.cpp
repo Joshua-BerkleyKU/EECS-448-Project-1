@@ -2,12 +2,14 @@
 
 Boards::Boards()
 {
+  //these are for the outside board for the markers
   char letters[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
   char nummbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+
   BattleBoard = new char*[sizerow];
   for (int i = 0; i < sizerow; i++)
   {
-    BattleBoard[i] = new char*[sizecol];
+    BattleBoard[i] = new char[sizecol];
   }
   for (int i = 0; i < sizerow; i++)
   {
