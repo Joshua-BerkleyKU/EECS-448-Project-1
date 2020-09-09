@@ -21,14 +21,17 @@ class Ship : public ShipInterface
 
 		int getLength() const { return m_length; }
 
-		// TODO fill in the correct format of coordinates when it's decided
-		bool isHit(/* The coords to check */) const;
+		bool isHit(std::string coord) const;
 
 		int numHits() const { return m_hits; }
 
 		bool isSunk() const;
 
 		std::string getLocation() const { return m_location; }
+
+		int[] stoiCoord(std::string coord);
+
+		std::string itosCoord(int[] coord);
 
 	private:
 		int m_length;
