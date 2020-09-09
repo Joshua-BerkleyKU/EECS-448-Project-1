@@ -1,7 +1,6 @@
 #ifndef BOARDS_H
 #define BOARDS_H
 #include <iostream>
-#include <fstream>
 
 class Boards
 {
@@ -24,13 +23,15 @@ class Boards
     /** @pre a number for the row and column, the number be between 1 and 9.
 	*   @post returns a certan point on the board.
 	*/
-    char getpointat(int row, int col);
+    char getpointat(string coord);
 
     /** @pre a number for the row and column, the number be between 1 and 9. also
   *   a char to change the point on the board
 	*   @post changes a certan point on the board.
 	*/
-    void changepointat(int row, int col, char newpoint);
+    void changepointat(string coord, char newpoint);
+
+    int[] stoiCoord(string coord);
 
   private:
     // the board pointer

@@ -17,7 +17,7 @@ Boards::Boards()
     {
       if (i == 0 && j == 0)
       {
-        BattleBoard[i][j] = "T";
+        BattleBoard[i][j] = "_";
       }
       else if (i == 0)
       {
@@ -57,12 +57,28 @@ void Boards::print()
   }
 }
 
-char Boards::getpointat(int row, int col)
+char Boards::getpointat(string coord)
 {
-  return(BattleBoard[row][col]);
+  int intCoordint[2];
+  intCoord = stoiCoord(coord);
+  char temp = BattleBoard[intCoord[0]][intCoord[1]];
+  return(temp);
 }
 
-void Boards::changepointat(int row, int col, char newpoint)
+void Boards::changepointat(string coord, char newpoint)
 {
-  BattleBoard[row][col] = newpoint;
+  int intCoordint[2];
+  intCoord = stoiCoord(coord);
+  BattleBoard[intCoord[0]][intCoord[1]] = newpoint;
+}
+
+int[] Boards::stoiCoord(string coord)
+{
+	int intCoordint[2];
+
+	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
+	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
+
+	return intCoord;
+
 }
