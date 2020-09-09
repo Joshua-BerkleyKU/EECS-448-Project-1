@@ -12,11 +12,30 @@ Ship::Ship(int length, std::string location) {
 	m_hits = 0;
 }
 
-bool Ship::isHit(/* The coords to check */) const {
-	// TODO fill in method definition once coordinate system is decided
-	return false;
+bool Ship::isHit(std::string coord) const {
+	std::size_t found = m_location.find(coord);
+	return (found != std::string::npos);
 }
 
 bool Ship::isSunk() const {
 	return (m_hits == m_length);
+}
+
+int[] Ship::stoiCoord(std::string coord) {
+	int[] intCoord = new int[2];
+	
+	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
+	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
+
+	return intCoord;
+
+}
+
+std::string Ship::itosCoord(int[] coord) {
+	std::string strCoord = "";
+
+	strCoord += (char)(coord[0]+65);
+	strCoord += (char)(coord[1]+48);
+
+	return strCoord;
 }
