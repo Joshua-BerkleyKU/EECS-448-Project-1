@@ -72,7 +72,7 @@ void Boards::changepointat(string coord, char newpoint)
   BattleBoard[intCoord[0]][intCoord[1]] = newpoint;
 }
 
-int[] Boards::stoiCoord(string coord)
+int* Boards::stoiCoord(string coord)
 {
 	int intCoordint[2];
 

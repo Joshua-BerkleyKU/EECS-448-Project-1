@@ -31,7 +31,7 @@ class Boards
 	*/
     void changepointat(string coord, char newpoint);
 
-    int[] stoiCoord(string coord);
+    int* stoiCoord(string coord);
 
   private:
     // the board pointer
