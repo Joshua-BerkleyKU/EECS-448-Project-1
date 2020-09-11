@@ -88,6 +88,10 @@ void Client::RunSetup(){
 
 void Client::PlayGame(int num_ships){
 
+	//------------------------this is to test the player class, NEEDS TO CHANGE---------------
+	Player player1;
+	player1.placeShips();
+	//----------------------------------------------------------------------------------------
 
 		/* 			TODO -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

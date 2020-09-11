@@ -3,8 +3,8 @@
 Boards::Boards()
 {
   //these are for the outside board for the markers
-  char letters[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
-  char nummbers[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+  char letters[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+  char nummbers[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
   BattleBoard = new char*[sizerow];
   for (int i = 0; i < sizerow; i++)
@@ -17,7 +17,7 @@ Boards::Boards()
     {
       if (i == 0 && j == 0)
       {
-        BattleBoard[i][j] = "_";
+        BattleBoard[i][j] = '_';
       }
       else if (i == 0)
       {
@@ -29,7 +29,7 @@ Boards::Boards()
       }
       else
       {
-        BattleBoard[i][j] = "X";
+        BattleBoard[i][j] = 'X';
       }
     }
   }
@@ -57,25 +57,26 @@ void Boards::print()
   }
 }
 
-char Boards::getpointat(string coord)
+char Boards::getpointat(std::string coord)
 {
   int intCoordint[2];
-  intCoord = stoiCoord(coord);
+  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted lol
+  //sorry for the caps, just wanted you to see it
   char temp = BattleBoard[intCoord[0]][intCoord[1]];
   return(temp);
 }
 
-void Boards::changepointat(string coord, char newpoint)
+void Boards::changepointat(std::string coord, char newpoint)
 {
   int intCoordint[2];
-  intCoord = stoiCoord(coord);
+  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted  
   BattleBoard[intCoord[0]][intCoord[1]] = newpoint;
 }
 
-int* Boards::stoiCoord(string coord)
+int* Boards::stoiCoord(std::string coord)
 {
 	int intCoordint[2];
-
+  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted  
 	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
 
