@@ -59,24 +59,23 @@ void Boards::print()
 
 char Boards::getpointat(std::string coord)
 {
-  int intCoordint[2];
-  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted lol
-  //sorry for the caps, just wanted you to see it
+  int intCoord[2];
+  intCoord = stoiCoord(coord); 
   char temp = BattleBoard[intCoord[0]][intCoord[1]];
   return(temp);
 }
 
 void Boards::changepointat(std::string coord, char newpoint)
 {
-  int intCoordint[2];
-  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted  
+  int intCoord[2];
+  intCoord = stoiCoord(coord);
   BattleBoard[intCoord[0]][intCoord[1]] = newpoint;
 }
 
 int* Boards::stoiCoord(std::string coord)
 {
-	int intCoordint[2];
-  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted  
+	int intCoord[2];
+  intCoord = stoiCoord(coord);
 	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
 
