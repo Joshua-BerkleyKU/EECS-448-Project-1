@@ -59,7 +59,7 @@ void Boards::print()
 
 char Boards::getpointat(std::string coord)
 {
-  int coordloaction = new int[2];
+  int* coordloaction = new int[2];
   coordloaction = stoiCoord(coord);
   char temp = BattleBoard[coordloaction[0]][coordloaction[1]];
   delete coordloaction;
@@ -68,7 +68,7 @@ char Boards::getpointat(std::string coord)
 
 void Boards::changepointat(std::string coord, char newpoint)
 {
-  int coordloaction = new int[2];
+  int* coordloaction = new int[2];
   coordloaction = stoiCoord(coord);
   BattleBoard[coordloaction[0]][coordloaction[1]] = newpoint;
   delete coordloaction;
@@ -77,7 +77,6 @@ void Boards::changepointat(std::string coord, char newpoint)
 int* Boards::stoiCoord(std::string coord)
 {
 	int intCoord[2];
-  intCoord = stoiCoord(coord);
 	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
 
