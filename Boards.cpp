@@ -60,7 +60,8 @@ void Boards::print()
 char Boards::getpointat(std::string coord)
 {
   int intCoordint[2];
-  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted 
+  auto intCoord = stoiCoord(coord); //THIS LINE WAS NOT WORKING, IT HAD NO TYPE DECLARATION. So I put auto bc I'm unsure of what you wanted lol
+  //sorry for the caps, just wanted you to see it
   char temp = BattleBoard[intCoord[0]][intCoord[1]];
   return(temp);
 }

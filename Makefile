@@ -1,7 +1,7 @@
-Run: main.o Client.o Player.o Boards.o
+Run: main.o Client.o Player.o Boards.o 
 	g++ -std=c++11 -g -Wall main.o Client.o Player.o Boards.o -o Run
 
-main.o: main.cpp Client.h Player.h
+main.o: main.cpp Client.h
 	g++ -std=c++11 -g -Wall -c main.cpp
 
 Client.o: Client.h Client.cpp
