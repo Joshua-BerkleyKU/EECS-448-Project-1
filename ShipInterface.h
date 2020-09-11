@@ -24,7 +24,7 @@ class ShipInterface {
 		 * @param coord - the coordinate to check given as a string (e.g. "A2")
 		 * @return true if it is a hit, false otherwise
 		 */
-		virtual bool isHit(std::string coord) const=0;
+		virtual bool isHit(std::string coord)=0;
 
 		/**
 		 * @return the number of hits on this Ship

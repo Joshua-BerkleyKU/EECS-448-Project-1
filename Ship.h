@@ -21,7 +21,7 @@ class Ship : public ShipInterface
 		
 		int getLength() const { return m_length; }
 
-		bool isHit(std::string coord) const;
+		bool isHit(std::string coord);
 
 		int numHits() const { return m_hits; }
 
@@ -36,6 +36,7 @@ class Ship : public ShipInterface
 	private:
 		int m_length;
 		std::string m_location;
+		std::string m_hitLocations;
 		int m_hits;
 };
 

@@ -10,12 +10,24 @@ Ship::Ship(int length, std::string location) {
 	m_length = length;
 	m_location = location;
 	m_hits = 0;
+	m_hitLocations = "";
 }
 
-bool Ship::isHit(std::string coord) const {
-	// TODO track number of hits
-	std::size_t found = m_location.find(coord);
-	return (found != std::string::npos);
+bool Ship::isHit(std::string coord) {
+	bool isFound = (m_location.find(coord) != std::string::npos); // Checks if coord is a substring of m_location
+	
+	if (isFound) {
+		if (m_hits == 0) {
+			// Ship has not been hit before
+			m_hitLocations = coord;
+			m_hits++;
+		} else if (m_hitLocations.find(coord) == std::string::npos) {
+			m_hitLocations += ' ' + coord;
+			m_hits++;
+		} // else the coordinate given has already been hit
+	}
+
+	return (isFound);
 }
 
 bool Ship::isSunk() const {
