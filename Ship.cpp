@@ -13,6 +13,7 @@ Ship::Ship(int length, std::string location) {
 }
 
 bool Ship::isHit(std::string coord) const {
+	// TODO track number of hits
 	std::size_t found = m_location.find(coord);
 	return (found != std::string::npos);
 }
@@ -21,8 +22,8 @@ bool Ship::isSunk() const {
 	return (m_hits == m_length);
 }
 
-int[] Ship::stoiCoord(std::string coord) {
-	int[] intCoord = new int[2];
+int* Ship::stoiCoord(std::string coord) {
+	int intCoord[2];
 	
 	intCoord[0] = coord.at(0) - 65; // 'A' has ASCII value of 65
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
@@ -31,7 +32,7 @@ int[] Ship::stoiCoord(std::string coord) {
 
 }
 
-std::string Ship::itosCoord(int[] coord) {
+std::string Ship::itosCoord(int* coord) {
 	std::string strCoord = "";
 
 	strCoord += (char)(coord[0]+65);
