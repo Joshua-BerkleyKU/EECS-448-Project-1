@@ -1,5 +1,5 @@
-Run: main.o Client.o Player.o Boards.o 
-	g++ -std=c++11 -g -Wall main.o Client.o Player.o Boards.o -o Run
+Run: main.o Client.o Player.o Boards.o Ship.o
+	g++ -std=c++11 -g -Wall main.o Client.o Player.o Boards.o Ship.o -o Run
 
 main.o: main.cpp Client.h
 	g++ -std=c++11 -g -Wall -c main.cpp
@@ -12,6 +12,9 @@ Player.o: Player.h Player.cpp
 
 Boards.o: Boards.h Boards.cpp
 	g++ -std=c++11 -g -Wall -c Boards.cpp
+
+Ship.o: Ship.h Ship.cpp
+	g++ -std=c++11 -g -Wall -c Ship.cpp
 
 clean:
 	rm *.o Run
