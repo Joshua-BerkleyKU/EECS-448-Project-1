@@ -21,11 +21,11 @@ Boards::Boards()
       }
       else if (i == 0)
       {
-        BattleBoard[i][j] = letters[j];
+        BattleBoard[i][j] = letters[j-1];
       }
       else if (j == 0)
       {
-        BattleBoard[i][j] = nummbers[i];
+        BattleBoard[i][j] = nummbers[i-1];
       }
       else
       {
@@ -46,7 +46,6 @@ Boards::~Boards()
 
 void Boards::print()
 {
-  std::cout << "test Boards:" << "\n";
   for (int i = 0; i < sizerow; i++)
   {
     for (int j = 0; j < sizecol; j++)
