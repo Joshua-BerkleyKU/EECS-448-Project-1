@@ -24,7 +24,7 @@ class ShipInterface {
 		 * @param coord - the coordinate to check given as a string (e.g. "A2")
 		 * @return true if it is a hit, false otherwise
 		 */
-		virtual bool isHit(std::string coord) const=0;
+		virtual bool isHit(std::string coord)=0;
 
 		/**
 		 * @return the number of hits on this Ship
@@ -46,14 +46,14 @@ class ShipInterface {
 		 * @param coord - the coordinate formatted as a string
 		 * @return the coordinate as a pair of ints, inside an array of length 2
 		 */
-		virtual int[] stoiCoord(std::string coord)=0;
+		virtual int* stoiCoord(std::string coord)=0;
 
 		/**
 		 * Takes in a single coordinate as a pair of ints and returns it as a string.
 		 * @param coord - the coordinate formatted as a pair of ints in an array of length 2
 		 * @return the coordinate as a string
 		 */
-		virtual std::string itosCoord(int[] coord)=0;
+		virtual std::string itosCoord(int* coord)=0;
 	
 };
 
