@@ -57,14 +57,14 @@ void Client::RunSetup(){
 				valid_num_of_ships = false;
 				std::cin.clear();
 				std::cin.ignore();
-				std::cout << "\n Please enter less than 5 ships to play with: ";
+				std::cout << "\nPlease enter less than 5 ships to play with: ";
 
 			}
 			if(userShips <= 0) {
 				valid_num_of_ships = false;
 				std::cin.clear();
 				std::cin.ignore();
-				std::cout << "\n Please enter at least 1 ship to play with: ";
+				std::cout << "\nPlease enter at least 1 ship to play with: ";
 
 			}
 			if(valid_num_of_ships == true) {
@@ -73,22 +73,17 @@ void Client::RunSetup(){
 
 			}
 	  }
-
 		ship_count = userShips;
-		std::cout << "\n\nGame settings updated to be played with " << ship_count << " ships!\n\n\n";
-
+		std::cout << "\nGame settings updated to be played with " << ship_count << " ship(s)!\n";
    }
-
 		if (userChoice == 3){	//###Exit Program
-
 			end_program = true;
-
 		}
 }	//end of run conidition
 }	//end of Client::Run
 
-void Client::PlayGame(int num_ships){
-
+void Client::PlayGame(int num_ships)
+{
 	Player* player1 = new Player;		//create each player
 	Player* player2 = new Player;
 
@@ -101,7 +96,7 @@ void Client::PlayGame(int num_ships){
 	{
 		if(turn == false)
 		{
-			std::cout << "\nPlayer 1, its your turn!\n";
+			std::cout << "\nPlayer 1, its your turn!\n\n";
 			player1->printBoards(); //prints shoot board
 
 			std::string shot;
@@ -111,61 +106,52 @@ void Client::PlayGame(int num_ships){
 				std::cout << "\nCoordinate to fire at: ";
 				std::cin >> shot;
 
-				if(( CheckShotInput(shot) == false) || ( std::cin.fail() )) //Is the user input good?
+				if((CheckShotInput(shot) == false) || (std::cin.fail())) //Is the user input good?
 				{	
 					std::cin.clear();
 					std::cin.ignore();
-					std::cout << "\n\nConnection to missiles lost... Please enter a valid input..\n";
-					std::cout << "Valid inputs are: < A thru I > then < 1 thru 9 >\n\n";
+					std::cout << "\nConnection to missiles lost... Please enter a valid input..\n";
+					std::cout << "\nValid inputs are A through I and 1 through 9, i.e. A2 A5\n";
 				} 
 				else 
 				{
 					if (player1->shoot(shot) == true) //Is the shot unique?
 					{		
-						std::cout << "\n\n\n FIRE!!!\n\n";
+						std::cout << "\nFIRE!!!\n";
 						valid_input = true;
 					} 
 					else
 					{
 			 			std::cout << "\n\n Captain! We have already shot at that location! \n\n";
-
-
-		}}} //end input loop
-
-		if (player1->isHit(shot) == true){	//Is it a hit?
-
+					}
+				}	
+			} //end input loop
+			if (player1->isHit(shot) == true)
+			{	//Is it a hit?
 				std::cout << "\n!!! BANG !!!\n";
-
-			if (player1->isSunk(shot) == true){	//Is it a sunk?
-
-				std::cout << "\nYou have sunk their ship with that shot!\n";
-
-			} else {
-
-				std::cout << "\nThats a hit!\n";
-
+				if (player1->isSunk(shot) == true){	//Is it a sunk?
+					std::cout << "\nYou have sunk their ship with that shot!\n";
+				} 
+				else
+				{
+					std::cout << "\nThats a hit!\n";
+				}
+			} 
+			else
+			{
+				std::cout << "\n*bloooop.....the missile was off-target.\n";
 			}
-		} else {
-
-				std::cout << "\n *bloooop...\n.\n.\n\nMissle was off-target\n\n";
-
-		}
-
-		if (player1->shipsRemaining() == 0){	//   Game won condition
-
-			std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
-			player1->printBoards();
-			std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
-			end_game = true;
-
-		}
-
+			if (player1->shipsRemaining() == 0) //Game win condition
+			{
+				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
+				player1->printBoards();
+				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
+				end_game = true;
+			}
 		//------------------------------------------------------------------------------------------
-
-
 	} else {			//Player 2 turn
 
-		std::cout << "\n\n Player 2, its your turn!\n\n";
+		std::cout << "\nPlayer 2, its your turn!\n\n";
 		player2->printBoards();
 
 		std::string shot;
@@ -173,7 +159,7 @@ void Client::PlayGame(int num_ships){
 		bool valid_input = false; //Makes sure that user input is good before advancing
 		while (valid_input == false){ //start input loop
 
-			std::cout << "\n\nCoordinate to fire at: ";
+			std::cout << "\nCoordinate to fire at: ";
 			std::cin >> shot;
 
 			if(( CheckShotInput(shot) == false) || ( std::cin.fail() )) {	//Is the user input good?

@@ -98,7 +98,6 @@ void Player::placeShips(int number_ships, int player_number)
 {
   std::string ship_coord1;
   std::string ship_coord2;
-  bool invalid = true;
 
   if (player_number == 1)
   {
@@ -324,7 +323,7 @@ void Player::placeShips(int number_ships, int player_number)
 
 void Player::printBoards()
 {
-  m_ship_board.print();
+  m_shoot_board.print();
 }
 
 bool Player::shoot(std::string shot)
@@ -344,5 +343,5 @@ bool Player::isSunk(std::string shot)
 
 int Player::shipsRemaining()
 {
-  return 2; //remove this
+  return m_ships_remaining; 
 }
