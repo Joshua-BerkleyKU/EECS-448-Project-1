@@ -3,7 +3,6 @@
  * File Name:  main.cpp
  * Author: Darrin Ternes
  * Team: 15
-
  ---------------------------------------------------------------------------- */
 
 #include "Client.h"

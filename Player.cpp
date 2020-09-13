@@ -4,6 +4,11 @@ Player::Player()
 {
   m_ships_remaining = 0;
   m_player_number = "";
+  m_bs_remaining = 100;
+  m_cs_remaining = 100;
+  m_fs_remaining = 100;
+  m_ss_remaining = 100;
+  m_ds_remaining = 100;
 }
 
 Player::~Player()
@@ -33,10 +38,26 @@ bool Player::checkValidPlacement(std::string ship_coord1, std::string ship_coord
     return false;
   }
 
+  if ((m_ship_board.getpointat(ship_coord1) == 'B') || m_ship_board.getpointat(ship_coord2) == 'B')
+  {
+    return false;
+  }
+  if ((m_ship_board.getpointat(ship_coord1) == 'C') || m_ship_board.getpointat(ship_coord2) == 'C')
+  {
+    return false;
+  }
   if ((m_ship_board.getpointat(ship_coord1) == 'S') || m_ship_board.getpointat(ship_coord2) == 'S')
   {
     return false;
   }
+  if ((m_ship_board.getpointat(ship_coord1) == 'D') || m_ship_board.getpointat(ship_coord2) == 'D')
+  {
+    return false;
+  }
+  if ((m_ship_board.getpointat(ship_coord1) == 'F') || m_ship_board.getpointat(ship_coord2) == 'F')
+  {
+    return false;
+  }        
 
   //converts the letters in their integer ASCII form
   int letter1_int = letter1 - '0';
@@ -91,9 +112,9 @@ void Player::markBoard(Ship ship)
       {
         m_ship_board.changepointat(coord1, 'D');
       }
-      else if (ship.getName() == "cruiser2")
+      else if (ship.getName() == "frigate")
       {
-        m_ship_board.changepointat(coord1, 'K');
+        m_ship_board.changepointat(coord1, 'F');
       }                  
       coord1.pop_back();
       number1++;
@@ -121,9 +142,9 @@ void Player::markBoard(Ship ship)
       {
         m_ship_board.changepointat(coord1, 'D');
       }
-      else if (ship.getName() == "cruiser2")
+      else if (ship.getName() == "frigate")
       {
-        m_ship_board.changepointat(coord1, 'K');
+        m_ship_board.changepointat(coord1, 'F');
       }                     
       letter1++;
       coord1 = letter1;
@@ -158,77 +179,51 @@ void Player::placeShips(int number_ships, int player_number)
   //--------------------------------------------------------------------------------------------------------
   if (number_ships == 1)
   {
-    std::cout << "Where would you like to place your SIZE FOUR battleship?: ";
+    std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 4))
+    ship_coord2 = ship_coord1;
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }
-    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
-    m_bs_remaining = 4;
-    markBoard(battleship);
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
+    m_fs_remaining = 1;
+    markBoard(frigate);
   }
   //--------------------------------------------------------------------------------------------------------
   else if (number_ships == 2)
   {
-    std::cout << "Where would you like to place your SIZE FOUR battleship?: ";
+    std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
     std::cin >> ship_coord1;
     std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 4))
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 2))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
-    m_bs_remaining = 4;    
-    markBoard(battleship);
+    Ship destroyer(2, ship_coord1, ship_coord2, "destroyer");
+    m_ds_remaining = 2;    
+    markBoard(destroyer);
 
-    std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
+    std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
+    ship_coord2 = ship_coord1;    
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser");
-    m_cs_remaining = 3;
-    markBoard(cruiser);
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
+    m_fs_remaining = 1;
+    markBoard(frigate);
   }
   //--------------------------------------------------------------------------------------------------------
   else if (number_ships == 3)
   {
-    std::cout << "Where would you like to place your SIZE FOUR battleship?: ";
-    std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 4))
-    {
-      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
-      std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
-    }    
-    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
-    m_bs_remaining = 4;
-    markBoard(battleship);
-
-    std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
-    std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
-    {
-      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
-      std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
-    }        
-    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
-    m_cs_remaining = 3;
-    markBoard(cruiser);   
-
     std::cout << "Where would you like to place your SIZE THREE submarine?: ";
     std::cin >> ship_coord1;
     std::cin >> ship_coord2;
@@ -237,15 +232,41 @@ void Player::placeShips(int number_ships, int player_number)
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
-    }        
+    }    
     Ship submarine(3, ship_coord1, ship_coord2, "submarine");
     m_ss_remaining = 3;
     markBoard(submarine);
+
+    std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
+    std::cin >> ship_coord1;
+    std::cin >> ship_coord2;
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 2))
+    {
+      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
+      std::cin >> ship_coord1;
+      std::cin >> ship_coord2;
+    }        
+    Ship destroyer(2, ship_coord1, ship_coord2, "destroyer"); 
+    m_ds_remaining = 2;
+    markBoard(destroyer);   
+
+    std::cout << "Where would you like to place your SIZE ONE frigate?: ";
+    std::cin >> ship_coord1;
+    ship_coord2 = ship_coord1;    
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
+    {
+      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
+      std::cin >> ship_coord1;
+      std::cin >> ship_coord2;
+    }        
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
+    m_fs_remaining = 1;
+    markBoard(frigate);
   }
   //--------------------------------------------------------------------------------------------------------
   else if (number_ships == 4)
   {
-    std::cout << "Where would you like to place your SIZE FOUR battleship?: ";
+    std::cout << "Where would you like to place your SIZE FOUR cruiser?: ";
     std::cin >> ship_coord1;
     std::cin >> ship_coord2;
     while (!checkValidPlacement(ship_coord1, ship_coord2, 4))
@@ -254,22 +275,9 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
-    m_bs_remaining = 4;
-    markBoard(battleship);
-
-    std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
-    std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
-    {
-      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
-      std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
-    }        
-    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
-    m_cs_remaining = 3;
-    markBoard(cruiser);   
+    Ship cruiser(4, ship_coord1, ship_coord2, "cruiser");
+    m_cs_remaining = 4;
+    markBoard(cruiser);
 
     std::cout << "Where would you like to place your SIZE THREE submarine?: ";
     std::cin >> ship_coord1;
@@ -280,9 +288,9 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship submarine(3, ship_coord1, ship_coord2, "submarine");
+    Ship submarine(3, ship_coord1, ship_coord2, "submarine"); 
     m_ss_remaining = 3;
-    markBoard(submarine);
+    markBoard(submarine);   
 
     std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
     std::cin >> ship_coord1;
@@ -292,15 +300,41 @@ void Player::placeShips(int number_ships, int player_number)
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
-    }    
+    }        
     Ship destroyer(2, ship_coord1, ship_coord2, "destroyer");
     m_ds_remaining = 2;
     markBoard(destroyer);
+
+    std::cout << "Where would you like to place your SIZE ONE frigate?: ";
+    std::cin >> ship_coord1;
+    ship_coord2 = ship_coord1;    
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
+    {
+      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
+      std::cin >> ship_coord1;
+      std::cin >> ship_coord2;
+    }    
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
+    m_fs_remaining = 1;
+    markBoard(frigate);
     //--------------------------------------------------------------------------------------------------------
   }
   else if (number_ships == 5)
   {
-    std::cout << "Where would you like to place your SIZE FOUR battleship?: ";
+    std::cout << "Where would you like to place your SIZE FIVE battleship?: ";
+    std::cin >> ship_coord1;
+    std::cin >> ship_coord2;
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 5))
+    {
+      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
+      std::cin >> ship_coord1;
+      std::cin >> ship_coord2;
+    }    
+    Ship battleship(5, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 5;
+    markBoard(battleship);
+
+    std::cout << "Where would you like to place your SIZE FOUR cruiser?: ";
     std::cin >> ship_coord1;
     std::cin >> ship_coord2;
     while (!checkValidPlacement(ship_coord1, ship_coord2, 4))
@@ -308,25 +342,12 @@ void Player::placeShips(int number_ships, int player_number)
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
-    }    
-    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
-    m_bs_remaining = 4;
-    markBoard(battleship);
-
-    std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
-    std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
-    {
-      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
-      std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
-    m_cs_remaining = 3;
+    Ship cruiser(4, ship_coord1, ship_coord2, "cruiser"); 
+    m_cs_remaining = 4;
     markBoard(cruiser);
     
-    std::cout << "Where would you like to place your second SIZE THREE cruiser?: ";
+    std::cout << "Where would you like to place your second SIZE THREE submarine?: ";
     std::cin >> ship_coord1;
     std::cin >> ship_coord2;
     while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
@@ -335,22 +356,9 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser2(3, ship_coord1, ship_coord2, "cruiser2"); 
-    m_ks_remaining = 3;
-    markBoard(cruiser2);          
-
-    std::cout << "Where would you like to place your SIZE THREE submarine?: ";
-    std::cin >> ship_coord1;
-    std::cin >> ship_coord2;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 3))
-    {
-      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
-      std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
-    }        
-    Ship submarine(3, ship_coord1, ship_coord2, "submarine");
+    Ship submarine(3, ship_coord1, ship_coord2, "submarine"); 
     m_ss_remaining = 3;
-    markBoard(submarine);
+    markBoard(submarine);          
 
     std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
     std::cin >> ship_coord1;
@@ -360,10 +368,23 @@ void Player::placeShips(int number_ships, int player_number)
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
-    }    
+    }        
     Ship destroyer(2, ship_coord1, ship_coord2, "destroyer");
     m_ds_remaining = 2;
     markBoard(destroyer);
+
+    std::cout << "Where would you like to place your SIZE ONE frigate?: ";
+    std::cin >> ship_coord1;
+    ship_coord2 = ship_coord1;    
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
+    {
+      std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
+      std::cin >> ship_coord1;
+      std::cin >> ship_coord2;
+    }    
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
+    m_fs_remaining = 1;
+    markBoard(frigate);
     //--------------------------------------------------------------------------------------------------------    
   }
   else 
@@ -391,6 +412,11 @@ void Player::printShootBoard()
   m_shoot_board.print();
 }
 
+void Player::printShipBoard()
+{
+  m_ship_board.print();
+}
+
 bool Player::uniqueShot(std::string shot)
 {
   if (m_shoot_board.getpointat(shot) == '*')
@@ -408,26 +434,31 @@ bool Player::isHit(std::string shot)
 {
   if (m_ship_board.getpointat(shot) == 'B')
   {
-    m_bs_remaining--;
+    m_ship_board.changepointat(shot, 'X');
+    m_bs_remaining--; 
     return true;
   }
   else if (m_ship_board.getpointat(shot) == 'C')
   {
+    m_ship_board.changepointat(shot, 'X');    
     m_cs_remaining--;
     return true;
   }
-  else if (m_ship_board.getpointat(shot) == 'K')
+  else if (m_ship_board.getpointat(shot) == 'F')
   {
-    m_ks_remaining--;
+    m_ship_board.changepointat(shot, 'X');    
+    m_fs_remaining--;
     return true;
   }
   else if (m_ship_board.getpointat(shot) == 'S')
   {
+    m_ship_board.changepointat(shot, 'X');    
     m_ss_remaining--;
     return true;
   }
   else if (m_ship_board.getpointat(shot) == 'D')
   {
+    m_ship_board.changepointat(shot, 'X');    
     m_ds_remaining--;
     return true;
   }      
@@ -438,26 +469,31 @@ bool Player::isSunk(std::string shot)
 {
   if (m_bs_remaining == 0)
   {
+    m_bs_remaining = 100;
     m_ships_remaining--;
     return true;
   }
   else if (m_cs_remaining == 0)
   {
+    m_cs_remaining = 100;
     m_ships_remaining--;
     return true;
   }
-  else if (m_ks_remaining == 0)
+  else if (m_fs_remaining == 0)
   {
+    m_fs_remaining = 100;
     m_ships_remaining--;
     return true;
   }
   else if (m_ss_remaining == 0)
   {
+    m_ss_remaining = 100;
     m_ships_remaining--;
     return true;
   }
   else if (m_ds_remaining == 0)
   {
+    m_ds_remaining = 100;
     m_ships_remaining--;
     return true;
   }      
@@ -466,5 +502,6 @@ bool Player::isSunk(std::string shot)
 
 int Player::shipsRemaining()
 {
+  std::cout << "ships remaining: " << m_ships_remaining;
   return m_ships_remaining; 
 }

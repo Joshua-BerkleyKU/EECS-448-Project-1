@@ -57,7 +57,7 @@ void Client::RunSetup(){
 				valid_num_of_ships = false;
 				std::cin.clear();
 				std::cin.ignore();
-				std::cout << "\nPlease enter less than 5 ships to play with: ";
+				std::cout << "\nPlease enter less than 6 ships to play with: ";
 
 			}
 			if(userShips <= 0) {
@@ -97,14 +97,17 @@ void Client::PlayGame(int num_ships)
 		if(turn == false)
 		{
 			std::cout << "\nPlayer 1, its your turn!\n";
-			std::cout << "X = hit, * = miss\n\n";
+			std::cout << "YOUR CURRENT SHIP STATUS\n";
+			player1->printShipBoard(); //prints ship board
+			std::cout << "\nWHERE YOU'VE SHOT\n";
 			player1->printShootBoard(); //prints shoot board
+			std::cout << "X = hit, * = miss\n\n";
 
 			std::string shot;
 			bool valid_input = false; //Makes sure that user input is good before advancing
 			while (valid_input == false) //start input loop
 			{ 
-				std::cout << "\nCoordinate to fire at: ";
+				std::cout << "Coordinate to fire at: ";
 				std::cin >> shot;
 
 				if((CheckShotInput(shot) == false) || (std::cin.fail())) //Is the user input good?
@@ -130,7 +133,7 @@ void Client::PlayGame(int num_ships)
 			if (player2->isHit(shot) == true) //Is it a hit?
 			{	
 				player1->markShot(shot, true);
-				std::cout << "\n!!! BANG !!!\n";
+				std::cout << "BANG!!!";
 				if (player2->isSunk(shot) == true) //Is it a sunk?
 				{	
 					std::cout << "\nYou have sunk their ship with that shot!\n";
@@ -143,13 +146,13 @@ void Client::PlayGame(int num_ships)
 			else
 			{
 				player1->markShot(shot, false);
-				std::cout << "\n*bloooop.....the missile was off-target.\n";
+				std::cout << "*bloooop.....the missile was off-target.\n";
 			}
 			if (player2->shipsRemaining() == 0) //Game win condition
 			{
-				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
+				std::cout << "\n##########- PLAYER 1 HAS WON THE GAME!!! -##########\n";
 				player1->printShootBoard();
-				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
+				std::cout << "##########- PLAYER 1 HAS WON THE GAME!!! -##########\n";
 				end_game = true;
 			}
 		//------------------------------------------------------------------------------------------
@@ -157,14 +160,17 @@ void Client::PlayGame(int num_ships)
 		else //Player 2 turn
 		{
 			std::cout << "\nPlayer 2, its your turn!\n";
-			std::cout << "X = hit, * = miss\n\n";		
-			player2->printShootBoard();
+			std::cout << "YOUR CURRENT SHIP STATUS\n";
+			player2->printShipBoard(); //prints ship board
+			std::cout << "\nWHERE YOU'VE SHOT\n";
+			player2->printShootBoard(); //prints shoot board
+			std::cout << "X = hit, * = miss\n\n";
 
 			std::string shot;
 			bool valid_input = false; //Makes sure that user input is good before advancing
 			while (valid_input == false) //start input loop
 			{ 
-				std::cout << "\nCoordinate to fire at: ";
+				std::cout << "Coordinate to fire at: ";
 				std::cin >> shot;
 
 				if((CheckShotInput(shot) == false) || (std::cin.fail())) //Is the user input good?
@@ -185,12 +191,12 @@ void Client::PlayGame(int num_ships)
 					{
 						std::cout << "\nCaptain! We have already shot at that location!\n";
 					}
-				}	
+				}
 			} //end input loop
 			if (player1->isHit(shot) == true) //Is it a hit?
 			{	
 				player2->markShot(shot, true);
-				std::cout << "\n!!! BANG !!!\n";
+				std::cout << "BANG!!!";
 				if (player1->isSunk(shot) == true) //Is it a sunk?
 				{	
 					std::cout << "\nYou have sunk their ship with that shot!\n";
@@ -203,13 +209,13 @@ void Client::PlayGame(int num_ships)
 			else
 			{
 				player2->markShot(shot, false);
-				std::cout << "\n*bloooop.....the missile was off-target.\n";
+				std::cout << "bloooop.....the missile was off-target.\n";
 			}
 			if (player1->shipsRemaining() == 0) //Game win condition
 			{
-				std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
+				std::cout << "\n##########- PLAYER 2 HAS WON THE GAME!!! -##########\n";
 				player2->printShootBoard();
-				std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
+				std::cout << "##########- PLAYER 2 HAS WON THE GAME!!! -##########\n";
 				end_game = true;
 			}
 		} //end of turn selection
