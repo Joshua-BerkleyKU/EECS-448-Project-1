@@ -116,7 +116,7 @@ void Client::PlayGame(int num_ships)
 					std::cin.clear();
 					std::cin.ignore();
 					std::cout << "\nConnection to missiles lost... Please enter a valid input..\n";
-					std::cout << "\nValid inputs are A through I and 1 through 9, i.e. A2 A5\n";
+					std::cout << "Valid inputs are A through I and 1 through 9, i.e. A2 A5\n\n";
 				} 
 				else 
 				{
@@ -180,7 +180,7 @@ void Client::PlayGame(int num_ships)
 					std::cin.clear();
 					std::cin.ignore();
 					std::cout << "\nConnection to missiles lost... Please enter a valid input..\n";
-					std::cout << "\nValid inputs are A through I and 1 through 9, i.e. A2 A5\n";
+					std::cout << "Valid inputs are A through I and 1 through 9, i.e. A2 A5\n\n";
 				} 
 				else 
 				{

@@ -63,17 +63,65 @@ bool Player::checkValidPlacement(std::string ship_coord1, std::string ship_coord
   int letter1_int = letter1 - '0';
   int letter2_int = letter2 - '0';
 
-  if ((number2-number1+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
+  if ((number2 > number1))
   {
-    return true;
+    if ((number2-number1+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
+    {
+      return true;
+    }
+    else if ((letter2_int-letter1_int+1 == ship_size) && (number1-number2 == 0)) //else checks if the ship is placed horizontally the right # of spaces
+    {
+      return true;
+    }
+    else //the ship must be placed diagonal, which isn't valid
+    {
+      return false;
+    }
   }
-  else if ((letter2_int-letter1_int+1 == ship_size) && (number1-number2 == 0)) //else checks if the ship is placed horizontally the right # of spaces
+  else if (number2 < number1)
   {
-    return true;
+    if ((number1-number2+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
+    {
+      return true;
+    }
+    else if ((letter1_int-letter2_int+1 == ship_size) && (number1-number2 == 0)) //else checks if the ship is placed horizontally the right # of spaces
+    {
+      return true;
+    }
+    else //the ship must be placed diagonal, which isn't valid
+    {
+      return false;
+    }    
   }
-  else //the ship must be placed diagonal, which isn't valid
+  else if (letter1_int < letter2_int)
   {
-    return false;
+    if ((number1-number2+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
+    {
+      return true;
+    }
+    else if ((letter2_int-letter1_int+1 == ship_size) && (number1-number2 == 0)) //else checks if the ship is placed horizontally the right # of spaces
+    {
+      return true;
+    }
+    else //the ship must be placed diagonal, which isn't valid
+    {
+      return false;
+    }       
+  }
+  else
+  {
+    if ((number1-number2+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
+    {
+      return true;
+    }
+    else if ((letter1_int-letter2_int+1 == ship_size) && (number1-number2 == 0)) //else checks if the ship is placed horizontally the right # of spaces
+    {
+      return true;
+    }
+    else //the ship must be placed diagonal, which isn't valid
+    {
+      return false;
+    }           
   }
 }
 
@@ -87,6 +135,7 @@ void Player::markBoard(Ship ship)
   int number1_string = coord1[1];
 	int number1 = coord1[1] - '0';
   char letter2 = coord2[0];
+  int number2 = coord2[1] - '0';
   if (letter1 == letter2)
   {
     vertical = true;
@@ -94,62 +143,127 @@ void Player::markBoard(Ship ship)
 
   if (vertical) //the ship must be vertical
   {
-    for (int i = 0; i < ship.getLength(); i++)
+    if (number1 < number2)
     {
-      if (ship.getName() == "battleship")
+      for (int i = 0; i < ship.getLength(); i++)
       {
-        m_ship_board.changepointat(coord1, 'B');
+        if (ship.getName() == "battleship")
+        {
+          m_ship_board.changepointat(coord1, 'B');
+        }
+        else if (ship.getName() == "cruiser")
+        {
+          m_ship_board.changepointat(coord1, 'C');
+        }
+        else if (ship.getName() == "submarine")
+        {
+          m_ship_board.changepointat(coord1, 'S');
+        }
+        else if (ship.getName() == "destroyer")
+        {
+          m_ship_board.changepointat(coord1, 'D');
+        }
+        else if (ship.getName() == "frigate")
+        {
+          m_ship_board.changepointat(coord1, 'F');
+        }                  
+        coord1.pop_back();
+        number1++;
+        std::string num = std::to_string(number1);
+        coord1 += num;
       }
-      else if (ship.getName() == "cruiser")
+    }
+    else
+    {
+      for (int i = 0; i < ship.getLength(); i++)
       {
-        m_ship_board.changepointat(coord1, 'C');
+        if (ship.getName() == "battleship")
+        {
+          m_ship_board.changepointat(coord2, 'B');
+        }
+        else if (ship.getName() == "cruiser")
+        {
+          m_ship_board.changepointat(coord2, 'C');
+        }
+        else if (ship.getName() == "submarine")
+        {
+          m_ship_board.changepointat(coord2, 'S');
+        }
+        else if (ship.getName() == "destroyer")
+        {
+          m_ship_board.changepointat(coord2, 'D');
+        }
+        else if (ship.getName() == "frigate")
+        {
+          m_ship_board.changepointat(coord2, 'F');
+        }                  
+        coord2.pop_back();
+        number2++;
+        std::string num = std::to_string(number2);
+        coord2 += num;
       }
-      else if (ship.getName() == "submarine")
-      {
-        m_ship_board.changepointat(coord1, 'S');
-      }
-      else if (ship.getName() == "destroyer")
-      {
-        m_ship_board.changepointat(coord1, 'D');
-      }
-      else if (ship.getName() == "frigate")
-      {
-        m_ship_board.changepointat(coord1, 'F');
-      }                  
-      coord1.pop_back();
-      number1++;
-      std::string num = std::to_string(number1);
-      coord1 += num;
     }
   }
   else //the ship must be horizontal
   {
-    for (int i = 0; i < ship.getLength(); i++)
+    if (letter1 < letter2)
     {
-      if (ship.getName() == "battleship")
+      for (int i = 0; i < ship.getLength(); i++)
       {
-        m_ship_board.changepointat(coord1, 'B');
-      }
-      else if (ship.getName() == "cruiser")
+        if (ship.getName() == "battleship")
+        {
+          m_ship_board.changepointat(coord1, 'B');
+        }
+        else if (ship.getName() == "cruiser")
+        {
+          m_ship_board.changepointat(coord1, 'C');
+        }
+        else if (ship.getName() == "submarine")
+        {
+          m_ship_board.changepointat(coord1, 'S');
+        }
+        else if (ship.getName() == "destroyer")
+        {
+          m_ship_board.changepointat(coord1, 'D');
+        }
+        else if (ship.getName() == "frigate")
+        {
+          m_ship_board.changepointat(coord1, 'F');
+        }                     
+        letter1++;
+        coord1 = letter1;
+        coord1 += number1_string;
+      } 
+    }
+    else
+    {
+      for (int i = 0; i < ship.getLength(); i++)
       {
-        m_ship_board.changepointat(coord1, 'C');
-      }
-      else if (ship.getName() == "submarine")
-      {
-        m_ship_board.changepointat(coord1, 'S');
-      }
-      else if (ship.getName() == "destroyer")
-      {
-        m_ship_board.changepointat(coord1, 'D');
-      }
-      else if (ship.getName() == "frigate")
-      {
-        m_ship_board.changepointat(coord1, 'F');
-      }                     
-      letter1++;
-      coord1 = letter1;
-      coord1 += number1_string;
-    } 
+        if (ship.getName() == "battleship")
+        {
+          m_ship_board.changepointat(coord2, 'B');
+        }
+        else if (ship.getName() == "cruiser")
+        {
+          m_ship_board.changepointat(coord2, 'C');
+        }
+        else if (ship.getName() == "submarine")
+        {
+          m_ship_board.changepointat(coord2, 'S');
+        }
+        else if (ship.getName() == "destroyer")
+        {
+          m_ship_board.changepointat(coord2, 'D');
+        }
+        else if (ship.getName() == "frigate")
+        {
+          m_ship_board.changepointat(coord2, 'F');
+        }                     
+        letter2++;
+        coord2 = letter2;
+        coord2 += number1_string;    
+      }  
+    }
   }
 }
 
@@ -181,12 +295,16 @@ void Player::placeShips(int number_ships, int player_number)
   {
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');    
     ship_coord2 = ship_coord1;
     while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
+      std::cin.clear();
+      std::cin.ignore(10000, '\n');       
+      ship_coord2 = ship_coord1;
     }
     Ship frigate(1, ship_coord1, ship_coord2, "frigate");
     m_fs_remaining = 1;
@@ -210,12 +328,16 @@ void Player::placeShips(int number_ships, int player_number)
 
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');     
     ship_coord2 = ship_coord1;    
     while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
+      std::cin.clear();
+      std::cin.ignore(10000, '\n'); 
+      ship_coord2 = ship_coord1;
     }        
     Ship frigate(1, ship_coord1, ship_coord2, "frigate");
     m_fs_remaining = 1;
@@ -252,12 +374,16 @@ void Player::placeShips(int number_ships, int player_number)
 
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');     
     ship_coord2 = ship_coord1;    
     while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
+      std::cin.clear();
+      std::cin.ignore(10000, '\n'); 
+      ship_coord2 = ship_coord1;
     }        
     Ship frigate(1, ship_coord1, ship_coord2, "frigate");
     m_fs_remaining = 1;
@@ -307,12 +433,16 @@ void Player::placeShips(int number_ships, int player_number)
 
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');     
     ship_coord2 = ship_coord1;    
     while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
+      std::cin.clear();
+      std::cin.ignore(10000, '\n'); 
+      ship_coord2 = ship_coord1;
     }    
     Ship frigate(1, ship_coord1, ship_coord2, "frigate");
     m_fs_remaining = 1;
@@ -375,12 +505,16 @@ void Player::placeShips(int number_ships, int player_number)
 
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
+		std::cin.clear();
+		std::cin.ignore(10000, '\n');     
     ship_coord2 = ship_coord1;    
     while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
-      std::cin >> ship_coord2;
+      std::cin.clear();
+      std::cin.ignore(10000, '\n'); 
+      ship_coord2 = ship_coord1;
     }    
     Ship frigate(1, ship_coord1, ship_coord2, "frigate");
     m_fs_remaining = 1;
