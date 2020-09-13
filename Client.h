@@ -9,6 +9,8 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 #include <string>
+#include <iostream>
+#include <stdlib.h>
 #include "Player.h"
 
 class Client {

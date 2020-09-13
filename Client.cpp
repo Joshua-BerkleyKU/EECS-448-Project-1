@@ -18,7 +18,7 @@ void Client::RunSetup(){
 
 		int userChoice = 0;
 
-		std::cout << "\n========================\n---------{Menu}---------\n\n1) Start New Game of Battleship\n2) Edit Number of Ships\n3) Exit Battleship\n========================\nEnter your choice: ";
+		std::cout << "\n========================\n---------{Menu}---------\n1) Start New Game of Battleship\n2) Edit Number of Ships\n3) Exit Battleship\n========================\nEnter your choice: ";
 		std::cin >> userChoice;
 
 		if (std::cin.fail()) {
@@ -39,7 +39,7 @@ void Client::RunSetup(){
 
 			int userShips = 0;
 
-			std::cout << "\n\n Enter how many ships you would like next game to be played with (1 - 5): ";
+			std::cout << "\nEnter how many ships you would like next game to be played with (1 - 5): ";
 
 			while (true) {
 
@@ -92,42 +92,42 @@ void Client::PlayGame(int num_ships){
 	Player* player1 = new Player;		//create each player
 	Player* player2 = new Player;
 
-	player1->placeShips(num_ships);	//let both players place ships
-	player2->placeShips(num_ships);
-
+	player1->placeShips(num_ships, 1);	//let both players place ships
+	std::cout << "\n";
+	player2->placeShips(num_ships, 2);
 	end_game = false;
 
-	while (end_game == false){
-
-		if(turn == false){
-
-			std::cout << "\n\n Player 1, its your turn!\n\n";
-			player1->printBoards();
+	while (end_game == false)
+	{
+		if(turn == false)
+		{
+			std::cout << "\nPlayer 1, its your turn!\n";
+			player1->printBoards(); //prints shoot board
 
 			std::string shot;
-
 			bool valid_input = false; //Makes sure that user input is good before advancing
-			while (valid_input == false){ //start input loop
-
-				std::cout << "\n\nCoordinate to fire at: ";
+			while (valid_input == false) //start input loop
+			{ 
+				std::cout << "\nCoordinate to fire at: ";
 				std::cin >> shot;
 
-				if(( CheckShotInput(shot) == false) || ( std::cin.fail() )) {	//Is the user input good?
+				if(( CheckShotInput(shot) == false) || ( std::cin.fail() )) //Is the user input good?
+				{	
 					std::cin.clear();
 					std::cin.ignore();
 					std::cout << "\n\nConnection to missiles lost... Please enter a valid input..\n";
 					std::cout << "Valid inputs are: < A thru I > then < 1 thru 9 >\n\n";
-
-				} else {
-
-					if (player1->shoot(shot) == true){		//Is the shot unique?
-
-					std::cout << "\n\n\n FIRE!!!\n\n";
-					valid_input = true;
-
-					} else {
-
-			 		std::cout << "\n\n Captain! We have already shot at that location! \n\n";
+				} 
+				else 
+				{
+					if (player1->shoot(shot) == true) //Is the shot unique?
+					{		
+						std::cout << "\n\n\n FIRE!!!\n\n";
+						valid_input = true;
+					} 
+					else
+					{
+			 			std::cout << "\n\n Captain! We have already shot at that location! \n\n";
 
 
 		}}} //end input loop

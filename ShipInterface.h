@@ -39,7 +39,12 @@ class ShipInterface {
 		/**
 		 * @return the coordinates the Ship occupies
 		 */
-		virtual std::string getLocation() const=0;
+		virtual std::string getCoord1() const=0;
+
+		/**
+		 * @return the coordinates the Ship occupies
+		 */
+		virtual std::string getCoord2() const=0;
 
 		/**
 		 * Takes in a single coordinate as a string and returns it as a pair of ints.
