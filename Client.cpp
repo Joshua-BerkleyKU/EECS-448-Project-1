@@ -100,6 +100,7 @@ void Client::PlayGame(int num_ships)
 			std::cout << "YOUR CURRENT SHIP STATUS\n";
 			player1->printShipBoard(); //prints ship board
 			std::cout << "\nWHERE YOU'VE SHOT\n";
+			std::cout << "Enemy Ships Remaining: " << player2->shipsRemaining() << "\n";
 			player1->printShootBoard(); //prints shoot board
 			std::cout << "X = hit, * = miss\n\n";
 
@@ -163,6 +164,7 @@ void Client::PlayGame(int num_ships)
 			std::cout << "YOUR CURRENT SHIP STATUS\n";
 			player2->printShipBoard(); //prints ship board
 			std::cout << "\nWHERE YOU'VE SHOT\n";
+			std::cout << "Enemy Ships Remaining: " << player1->shipsRemaining() << "\n";			
 			player2->printShootBoard(); //prints shoot board
 			std::cout << "X = hit, * = miss\n\n";
 

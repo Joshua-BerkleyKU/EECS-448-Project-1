@@ -502,6 +502,5 @@ bool Player::isSunk(std::string shot)
 
 int Player::shipsRemaining()
 {
-  std::cout << "ships remaining: " << m_ships_remaining;
   return m_ships_remaining; 
 }
