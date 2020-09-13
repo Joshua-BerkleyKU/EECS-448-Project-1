@@ -3,14 +3,20 @@
 #include <iostream>
 #include <string>
 #include "Boards.h"
+#include "Ship.h"
 
 class Player
 {
     private:
         Boards m_ship_board;
         Boards m_shoot_board;
+        int m_ships_remaining;
+        
+        bool checkValidPlacement(std::string ship_coord1, std::string ship_coord2, int ship_size);
 
     public:
+        Player();
+        ~Player();
         void placeShips(int number_ships);
         void printBoards();
         bool shoot(std::string shot);

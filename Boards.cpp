@@ -62,6 +62,7 @@ char Boards::getpointat(std::string coord)
   coordloaction = stoiCoord(coord);
   char temp = BattleBoard[coordloaction[0]][coordloaction[1]];
   delete coordloaction;
+  coordloaction = nullptr;
   return(temp);
 }
 
@@ -71,6 +72,7 @@ void Boards::changepointat(std::string coord, char newpoint)
   coordloaction = stoiCoord(coord);
   BattleBoard[coordloaction[0]][coordloaction[1]] = newpoint;
   delete coordloaction;
+  coordloaction = nullptr;
 }
 
 int* Boards::stoiCoord(std::string coord)
@@ -80,5 +82,4 @@ int* Boards::stoiCoord(std::string coord)
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
 
 	return intCoord;
-
 }

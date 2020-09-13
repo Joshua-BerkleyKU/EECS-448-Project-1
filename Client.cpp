@@ -18,7 +18,7 @@ void Client::RunSetup(){
 
 		int userChoice = 0;
 
-		std::cout << "\n\n\n\n========================\n---------{Menu}---------\n\n1) Start New Game of Battleship\n2) Edit Number of Ships\n3) Exit Battleship\n========================\n\nEnter your choice: ";
+		std::cout << "\n========================\n---------{Menu}---------\n\n1) Start New Game of Battleship\n2) Edit Number of Ships\n3) Exit Battleship\n========================\nEnter your choice: ";
 		std::cin >> userChoice;
 
 		if (std::cin.fail()) {
@@ -31,10 +31,9 @@ void Client::RunSetup(){
 
 		if(userChoice == 1){	//###Start Game
 
-			std::cout << "\n\n Starting Game with " << ship_count << " ships! \n\n";
+			std::cout << "\nStarting the game with " << ship_count << " ships! \n\n";
 			PlayGame(ship_count);
-
-  	}
+  		}
 
 		if (userChoice == 2){	//###Edit Ship Count -- This checks for the correct num of ships
 
@@ -239,8 +238,8 @@ void Client::PlayGame(int num_ships){
 
 	delete player1;	//free heap
 	delete player2;
-
-
+	player1 = nullptr;
+	player2 = nullptr;
 }
 
 bool Client::CheckShotInput(std::string shot_check){
