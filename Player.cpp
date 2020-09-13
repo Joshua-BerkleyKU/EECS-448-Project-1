@@ -75,7 +75,26 @@ void Player::markBoard(Ship ship)
   {
     for (int i = 0; i < ship.getLength(); i++)
     {
-      m_ship_board.changepointat(coord1, 'S');
+      if (ship.getName() == "battleship")
+      {
+        m_ship_board.changepointat(coord1, 'B');
+      }
+      else if (ship.getName() == "cruiser")
+      {
+        m_ship_board.changepointat(coord1, 'C');
+      }
+      else if (ship.getName() == "submarine")
+      {
+        m_ship_board.changepointat(coord1, 'S');
+      }
+      else if (ship.getName() == "destroyer")
+      {
+        m_ship_board.changepointat(coord1, 'D');
+      }
+      else if (ship.getName() == "cruiser2")
+      {
+        m_ship_board.changepointat(coord1, 'K');
+      }                  
       coord1.pop_back();
       number1++;
       std::string num = std::to_string(number1);
@@ -86,7 +105,26 @@ void Player::markBoard(Ship ship)
   {
     for (int i = 0; i < ship.getLength(); i++)
     {
-      m_ship_board.changepointat(coord1, 'S');    
+      if (ship.getName() == "battleship")
+      {
+        m_ship_board.changepointat(coord1, 'B');
+      }
+      else if (ship.getName() == "cruiser")
+      {
+        m_ship_board.changepointat(coord1, 'C');
+      }
+      else if (ship.getName() == "submarine")
+      {
+        m_ship_board.changepointat(coord1, 'S');
+      }
+      else if (ship.getName() == "destroyer")
+      {
+        m_ship_board.changepointat(coord1, 'D');
+      }
+      else if (ship.getName() == "cruiser2")
+      {
+        m_ship_board.changepointat(coord1, 'K');
+      }                     
       letter1++;
       coord1 = letter1;
       coord1 += number1_string;
@@ -129,7 +167,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }
-    Ship battleship(4, ship_coord1, ship_coord2);
+    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 4;
     markBoard(battleship);
   }
   //--------------------------------------------------------------------------------------------------------
@@ -144,7 +183,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2);
+    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 4;    
     markBoard(battleship);
 
     std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
@@ -156,7 +196,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2);
+    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser");
+    m_cs_remaining = 3;
     markBoard(cruiser);
   }
   //--------------------------------------------------------------------------------------------------------
@@ -171,7 +212,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2);
+    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 4;
     markBoard(battleship);
 
     std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
@@ -183,7 +225,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2); 
+    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
+    m_cs_remaining = 3;
     markBoard(cruiser);   
 
     std::cout << "Where would you like to place your SIZE THREE submarine?: ";
@@ -195,7 +238,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship submarine(3, ship_coord1, ship_coord2);
+    Ship submarine(3, ship_coord1, ship_coord2, "submarine");
+    m_ss_remaining = 3;
     markBoard(submarine);
   }
   //--------------------------------------------------------------------------------------------------------
@@ -210,7 +254,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2);
+    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 4;
     markBoard(battleship);
 
     std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
@@ -222,7 +267,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2); 
+    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
+    m_cs_remaining = 3;
     markBoard(cruiser);   
 
     std::cout << "Where would you like to place your SIZE THREE submarine?: ";
@@ -234,7 +280,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship submarine(3, ship_coord1, ship_coord2);
+    Ship submarine(3, ship_coord1, ship_coord2, "submarine");
+    m_ss_remaining = 3;
     markBoard(submarine);
 
     std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
@@ -246,7 +293,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship destroyer(2, ship_coord1, ship_coord2);
+    Ship destroyer(2, ship_coord1, ship_coord2, "destroyer");
+    m_ds_remaining = 2;
     markBoard(destroyer);
     //--------------------------------------------------------------------------------------------------------
   }
@@ -261,7 +309,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship battleship(4, ship_coord1, ship_coord2);
+    Ship battleship(4, ship_coord1, ship_coord2, "battleship");
+    m_bs_remaining = 4;
     markBoard(battleship);
 
     std::cout << "Where would you like to place your SIZE THREE cruiser?: ";
@@ -273,7 +322,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser(3, ship_coord1, ship_coord2); 
+    Ship cruiser(3, ship_coord1, ship_coord2, "cruiser"); 
+    m_cs_remaining = 3;
     markBoard(cruiser);
     
     std::cout << "Where would you like to place your second SIZE THREE cruiser?: ";
@@ -285,7 +335,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship cruiser2(3, ship_coord1, ship_coord2); 
+    Ship cruiser2(3, ship_coord1, ship_coord2, "cruiser2"); 
+    m_ks_remaining = 3;
     markBoard(cruiser2);          
 
     std::cout << "Where would you like to place your SIZE THREE submarine?: ";
@@ -297,7 +348,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }        
-    Ship submarine(3, ship_coord1, ship_coord2);
+    Ship submarine(3, ship_coord1, ship_coord2, "submarine");
+    m_ss_remaining = 3;
     markBoard(submarine);
 
     std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
@@ -309,7 +361,8 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin >> ship_coord1;
       std::cin >> ship_coord2;
     }    
-    Ship destroyer(2, ship_coord1, ship_coord2);
+    Ship destroyer(2, ship_coord1, ship_coord2, "destroyer");
+    m_ds_remaining = 2;
     markBoard(destroyer);
     //--------------------------------------------------------------------------------------------------------    
   }
@@ -321,24 +374,94 @@ void Player::placeShips(int number_ships, int player_number)
   m_ships_remaining = number_ships;
 }
 
-void Player::printBoards()
+void Player::markShot(std::string shot, bool hit)
+{
+  if (hit)
+  {
+    m_shoot_board.changepointat(shot, 'X');
+  }
+  else
+  {
+    m_shoot_board.changepointat(shot, '*');
+  }
+}
+
+void Player::printShootBoard()
 {
   m_shoot_board.print();
 }
 
-bool Player::shoot(std::string shot)
+bool Player::uniqueShot(std::string shot)
 {
-  return true;  //remove this
+  if (m_shoot_board.getpointat(shot) == '*')
+  {
+    return false;
+  }
+  else if (m_shoot_board.getpointat(shot) == 'X')
+  {
+    return false;
+  } 
+  return true;  
 }
 
 bool Player::isHit(std::string shot)
 {
-  return false; //remove this
+  if (m_ship_board.getpointat(shot) == 'B')
+  {
+    m_bs_remaining--;
+    return true;
+  }
+  else if (m_ship_board.getpointat(shot) == 'C')
+  {
+    m_cs_remaining--;
+    return true;
+  }
+  else if (m_ship_board.getpointat(shot) == 'K')
+  {
+    m_ks_remaining--;
+    return true;
+  }
+  else if (m_ship_board.getpointat(shot) == 'S')
+  {
+    m_ss_remaining--;
+    return true;
+  }
+  else if (m_ship_board.getpointat(shot) == 'D')
+  {
+    m_ds_remaining--;
+    return true;
+  }      
+  return false;
 }
 
 bool Player::isSunk(std::string shot)
 {
-  return false; //remove this
+  if (m_bs_remaining == 0)
+  {
+    m_ships_remaining--;
+    return true;
+  }
+  else if (m_cs_remaining == 0)
+  {
+    m_ships_remaining--;
+    return true;
+  }
+  else if (m_ks_remaining == 0)
+  {
+    m_ships_remaining--;
+    return true;
+  }
+  else if (m_ss_remaining == 0)
+  {
+    m_ships_remaining--;
+    return true;
+  }
+  else if (m_ds_remaining == 0)
+  {
+    m_ships_remaining--;
+    return true;
+  }      
+  return false;
 }
 
 int Player::shipsRemaining()

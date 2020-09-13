@@ -6,12 +6,13 @@
 
 #include "Ship.h"
 
-Ship::Ship(int length, std::string coord1, std::string coord2) {
+Ship::Ship(int length, std::string coord1, std::string coord2, std::string name) {
 	m_length = length;
 	m_coord1 = coord1;
 	m_coord2 = coord2;
 	m_hits = 0;
 	m_hitLocations = "";
+	m_name = name;
 }
 
 bool Ship::isHit(std::string coord)

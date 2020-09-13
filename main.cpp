@@ -9,14 +9,11 @@
 #include "Client.h"
 #include <iostream>
 
-int main(){
+int main()
+{
+	Client myClient;
+	myClient.RunSetup();
 
-		 Client myClient;
-		 myClient.RunSetup();
-
-std::cout << "\n\n\n\n\n### Program Terminated! ###\n\n";
-
+	std::cout << "\n### Program Terminated! ###\n\n";
 }
-
-
 //------------------------------------------------------------------------------

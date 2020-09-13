@@ -96,8 +96,9 @@ void Client::PlayGame(int num_ships)
 	{
 		if(turn == false)
 		{
-			std::cout << "\nPlayer 1, its your turn!\n\n";
-			player1->printBoards(); //prints shoot board
+			std::cout << "\nPlayer 1, its your turn!\n";
+			std::cout << "X = hit, * = miss\n\n";
+			player1->printShootBoard(); //prints shoot board
 
 			std::string shot;
 			bool valid_input = false; //Makes sure that user input is good before advancing
@@ -115,21 +116,23 @@ void Client::PlayGame(int num_ships)
 				} 
 				else 
 				{
-					if (player1->shoot(shot) == true) //Is the shot unique?
+					if (player1->uniqueShot(shot) == true) //Is the shot unique?
 					{		
 						std::cout << "\nFIRE!!!\n";
 						valid_input = true;
 					} 
 					else
 					{
-			 			std::cout << "\n\n Captain! We have already shot at that location! \n\n";
+			 			std::cout << "\nCaptain! We have already shot at that location!\n";
 					}
 				}	
 			} //end input loop
-			if (player1->isHit(shot) == true)
-			{	//Is it a hit?
+			if (player2->isHit(shot) == true) //Is it a hit?
+			{	
+				player1->markShot(shot, true);
 				std::cout << "\n!!! BANG !!!\n";
-				if (player1->isSunk(shot) == true){	//Is it a sunk?
+				if (player2->isSunk(shot) == true) //Is it a sunk?
+				{	
 					std::cout << "\nYou have sunk their ship with that shot!\n";
 				} 
 				else
@@ -139,124 +142,113 @@ void Client::PlayGame(int num_ships)
 			} 
 			else
 			{
+				player1->markShot(shot, false);
 				std::cout << "\n*bloooop.....the missile was off-target.\n";
 			}
-			if (player1->shipsRemaining() == 0) //Game win condition
+			if (player2->shipsRemaining() == 0) //Game win condition
 			{
 				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
-				player1->printBoards();
+				player1->printShootBoard();
 				std::cout << "\n\n ##########- PLAYER 1 HAS WON THE GAME!!! -##########\n\n";
 				end_game = true;
 			}
 		//------------------------------------------------------------------------------------------
-	} else {			//Player 2 turn
-
-		std::cout << "\nPlayer 2, its your turn!\n\n";
-		player2->printBoards();
-
-		std::string shot;
-
-		bool valid_input = false; //Makes sure that user input is good before advancing
-		while (valid_input == false){ //start input loop
-
-			std::cout << "\nCoordinate to fire at: ";
-			std::cin >> shot;
-
-			if(( CheckShotInput(shot) == false) || ( std::cin.fail() )) {	//Is the user input good?
-				std::cin.clear();
-				std::cin.ignore();
-				std::cout << "\n\nConnection to missiles lost... Please enter a valid input..\n";
-				std::cout << "Valid inputs are: < A thru I > then < 1 thru 9 >\n\n";
-
-			} else {
-
-				if (player2->shoot(shot) == true){		//Is the shot unique?
-
-				std::cout << "\n\n\n FIRE!!!\n\n";
-				valid_input = true;
-
-				} else {
-
-				std::cout << "\n\n Captain! We have already shot at that location! \n\n";
-
-
-	}}} //end input loop
-
-	if (player2->isHit(shot) == true){	//Is it a hit?
-
-			std::cout << "\n!!! BANG !!!\n";
-
-		if (player2->isSunk(shot) == true){	//Is it a sunk?
-
-			std::cout << "\nYou have sunk their ship with that shot!\n";
-
-		} else {
-
-			std::cout << "\nThats a hit!\n";
-
 		}
-	} else {
+		else //Player 2 turn
+		{
+			std::cout << "\nPlayer 2, its your turn!\n";
+			std::cout << "X = hit, * = miss\n\n";		
+			player2->printShootBoard();
 
-			std::cout << "\n *bloooop...\n.\n.\n\nMissle was off-target\n\n";
+			std::string shot;
+			bool valid_input = false; //Makes sure that user input is good before advancing
+			while (valid_input == false) //start input loop
+			{ 
+				std::cout << "\nCoordinate to fire at: ";
+				std::cin >> shot;
 
-	}
-
-	if (player2->shipsRemaining() == 0){	//   Game won condition
-
-		std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
-		player2->printBoards();
-		std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
-		end_game = true;
-
-	}}	//end of turn selection
-
-		if (turn == false){				//Switch turns
-
+				if((CheckShotInput(shot) == false) || (std::cin.fail())) //Is the user input good?
+				{	
+					std::cin.clear();
+					std::cin.ignore();
+					std::cout << "\nConnection to missiles lost... Please enter a valid input..\n";
+					std::cout << "\nValid inputs are A through I and 1 through 9, i.e. A2 A5\n";
+				} 
+				else 
+				{
+					if (player2->uniqueShot(shot) == true) //Is the shot unique?
+					{		
+						std::cout << "\nFIRE!!!\n";
+						valid_input = true;
+					} 
+					else
+					{
+						std::cout << "\nCaptain! We have already shot at that location!\n";
+					}
+				}	
+			} //end input loop
+			if (player1->isHit(shot) == true) //Is it a hit?
+			{	
+				player2->markShot(shot, true);
+				std::cout << "\n!!! BANG !!!\n";
+				if (player1->isSunk(shot) == true) //Is it a sunk?
+				{	
+					std::cout << "\nYou have sunk their ship with that shot!\n";
+				} 
+				else
+				{
+					std::cout << "\nThats a hit!\n";
+				}
+			} 
+			else
+			{
+				player2->markShot(shot, false);
+				std::cout << "\n*bloooop.....the missile was off-target.\n";
+			}
+			if (player1->shipsRemaining() == 0) //Game win condition
+			{
+				std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
+				player2->printShootBoard();
+				std::cout << "\n\n ##########- PLAYER 2 HAS WON THE GAME!!! -##########\n\n";
+				end_game = true;
+			}
+		} //end of turn selection
+		if (turn == false) //Switch turns
+		{				
 			turn = true;
-
-		} else {
-
+		} 
+		else
+		{
 			turn = false;
-
 		}
-	} // end_game loop
-
+	}
 
 	delete player1;	//free heap
 	delete player2;
 	player1 = nullptr;
 	player2 = nullptr;
-}
+} // end_game loop
 
-bool Client::CheckShotInput(std::string shot_check){
-
-
-	if (shot_check.length() != 2){			//Is it exactly two letter long?
-
+bool Client::CheckShotInput(std::string shot_check)
+{
+	if (shot_check.length() != 2) //Is it exactly two letter long?
+	{			
 		return false;
-
 	}
 
 	char letter = shot_check[0];
 	char number = shot_check[1];
 
-
-	 if (( number >= '1' ) && ( number <= '9' )){
-
-		 //compares ascii values
-
-		 if ( (letter >= 'A' ) && ( letter <= 'I' )){	//Is the alpha within range?
-
-	 		return true;		//Then the input is good!
-
-	 	}
-	 }
-
+	if (( number >= '1' ) && ( number <= '9' ))
+	{
+		//compares ascii values
+		if ( (letter >= 'A' ) && ( letter <= 'I' )) //Is the alpha within range?
+		{	
+			return true; //Then the input is good!		
+		}
+	}
 	 return false;
-
 }
-
-
 
 Client::Client(){ // constructor that defaults to the ship count being 3
 
@@ -264,13 +256,9 @@ Client::Client(){ // constructor that defaults to the ship count being 3
 	 end_game = false;
 	 ship_count = 3;
 	 turn = false;
-
 }
-
 
 Client::~Client(){	//destructor
 
-
 }	//end destructor
-
 //---------------------------------------------------------------------
