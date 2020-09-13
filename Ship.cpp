@@ -6,27 +6,32 @@
 
 #include "Ship.h"
 
-Ship::Ship(int length, std::string location) {
+Ship::Ship(int length, std::string coord1, std::string coord2, std::string name) {
 	m_length = length;
-	m_location = location;
+	m_coord1 = coord1;
+	m_coord2 = coord2;
 	m_hits = 0;
 	m_hitLocations = "";
+	m_name = name;
 }
 
-bool Ship::isHit(std::string coord) {
-	bool isFound = (m_location.find(coord) != std::string::npos); // Checks if coord is a substring of m_location
+bool Ship::isHit(std::string coord)
+{
+	bool isFound = true; //(m_location.find(coord) != std::string::npos); // Checks if coord is a substring of m_location
 	
-	if (isFound) {
-		if (m_hits == 0) {
+	if (isFound)
+	{
+		if (m_hits == 0)
+		{
 			// Ship has not been hit before
 			m_hitLocations = coord;
 			m_hits++;
-		} else if (m_hitLocations.find(coord) == std::string::npos) {
+		} else if (m_hitLocations.find(coord) == std::string::npos)
+		{
 			m_hitLocations += ' ' + coord;
 			m_hits++;
 		} // else the coordinate given has already been hit
 	}
-
 	return (isFound);
 }
 

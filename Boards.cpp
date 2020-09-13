@@ -29,7 +29,7 @@ Boards::Boards()
       }
       else
       {
-        BattleBoard[i][j] = 'X';
+        BattleBoard[i][j] = '~';
       }
     }
   }
@@ -58,19 +58,19 @@ void Boards::print()
 
 char Boards::getpointat(std::string coord)
 {
-  int* coordloaction = new int[2];
-  coordloaction = stoiCoord(coord);
-  char temp = BattleBoard[coordloaction[0]][coordloaction[1]];
-  delete coordloaction;
-  return(temp);
+  int intCoord[2];
+  intCoord[0] = (coord[0] - 'A') + 1;
+  intCoord[1] = (coord[1] - '0');
+  char temp = BattleBoard[intCoord[1]][intCoord[0]];
+  return temp;
 }
 
 void Boards::changepointat(std::string coord, char newpoint)
 {
-  int* coordloaction = new int[2];
-  coordloaction = stoiCoord(coord);
-  BattleBoard[coordloaction[0]][coordloaction[1]] = newpoint;
-  delete coordloaction;
+  int intCoord[2];
+  intCoord[0] = (coord[0] - 'A') + 1;
+  intCoord[1] = (coord[1] - '0');
+  BattleBoard[intCoord[1]][intCoord[0]] = newpoint;
 }
 
 int* Boards::stoiCoord(std::string coord)
@@ -80,5 +80,4 @@ int* Boards::stoiCoord(std::string coord)
 	intCoord[1] = coord.at(1) - 48; // '0' has ASCII value of 48
 
 	return intCoord;
-
 }

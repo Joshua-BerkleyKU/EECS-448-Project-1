@@ -17,7 +17,7 @@ class Ship : public ShipInterface
 		 * @param length - the length of the Ship, or how many spaces it occupies
 		 * @param location - the coordinates of the spaces the Ship occupies on the board
 		 */
-		Ship(int length, std::string location);
+		Ship(int length, std::string coord1, std::string coord2, std::string name);
 		
 		int getLength() const { return m_length; }
 
@@ -27,7 +27,10 @@ class Ship : public ShipInterface
 
 		bool isSunk() const;
 
-		std::string getLocation() const { return m_location; }
+		std::string getCoord1() const { return m_coord1; }
+		std::string getCoord2() const { return m_coord2; }
+
+		std::string getName() const { return m_name; }
 
 		int* stoiCoord(std::string coord);
 
@@ -35,8 +38,10 @@ class Ship : public ShipInterface
 
 	private:
 		int m_length;
-		std::string m_location;
+		std::string m_coord1;
+		std::string m_coord2;
 		std::string m_hitLocations;
+		std::string m_name;
 		int m_hits;
 };
 
