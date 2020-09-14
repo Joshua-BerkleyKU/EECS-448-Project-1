@@ -1,7 +1,7 @@
 /**
  * @author Trey Werr
  * @date 9/6
- * @brief Interface for the Ship class
+ * @brief Interface for the Ship class.
  */
 
 #ifndef SHIPINTERFACE_H
@@ -59,7 +59,6 @@ class ShipInterface {
 		 * @return the coordinate as a string
 		 */
 		virtual std::string itosCoord(int* coord)=0;
-	
 };
 
 #endif

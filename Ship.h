@@ -1,7 +1,7 @@
 /**
  * @author Trey Werr
  * @date 9/7
- * @brief Header file for the Ships
+ * @brief Header file for the Ship class.
  */
 
 #ifndef SHIP_H
@@ -30,6 +30,9 @@ class Ship : public ShipInterface
 		std::string getCoord1() const { return m_coord1; }
 		std::string getCoord2() const { return m_coord2; }
 
+		/**
+		 * @return The type of ship it is. Example: "cruiser" or "destroyer".
+		 */
 		std::string getName() const { return m_name; }
 
 		int* stoiCoord(std::string coord);

@@ -1,11 +1,3 @@
-/* -----------------------------------------------------------------------------
- *
- * File Name:  Client.cpp
- * Author: Darrin Ternes
- * Team: 15
-
- ---------------------------------------------------------------------------- */
-
 #include <iostream>
 #include "Client.h"
 #include <string>
@@ -269,4 +261,3 @@ Client::Client(){ // constructor that defaults to the ship count being 3
 Client::~Client(){	//destructor
 
 }	//end destructor
-//---------------------------------------------------------------------

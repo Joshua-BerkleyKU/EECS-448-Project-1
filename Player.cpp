@@ -23,6 +23,7 @@ bool Player::checkValidPlacement(std::string ship_coord1, std::string ship_coord
 		return false;
 	}
 
+  //breaks down the coordinates into their individual parts
 	char letter1 = ship_coord1[0];
 	int number1 = ship_coord1[1] - '0';
   char letter2 = ship_coord2[0];
@@ -38,6 +39,7 @@ bool Player::checkValidPlacement(std::string ship_coord1, std::string ship_coord
     return false;
   }
 
+  //checks if the user has previously placed a ship at this location
   if ((m_ship_board.getpointat(ship_coord1) == 'B') || m_ship_board.getpointat(ship_coord2) == 'B')
   {
     return false;
@@ -63,6 +65,7 @@ bool Player::checkValidPlacement(std::string ship_coord1, std::string ship_coord
   int letter1_int = letter1 - '0';
   int letter2_int = letter2 - '0';
 
+  //these if statements are necessary so the user can write coordinates forwards or backwards. Example: both A1 A5 and A5 A1 are valid. 
   if ((number2 > number1))
   {
     if ((number2-number1+1 == ship_size) && (letter1_int-letter2_int == 0)) //checks if the ship is placed vertically the right # of spaces
@@ -131,11 +134,14 @@ void Player::markBoard(Ship ship)
   std::string coord1 = ship.getCoord1();
   std::string coord2 = ship.getCoord2();
 
+  //breaks down the coordinates into their individual parts
   char letter1 = coord1[0];
   int number1_string = coord1[1];
 	int number1 = coord1[1] - '0';
   char letter2 = coord2[0];
   int number2 = coord2[1] - '0';
+
+  //if the letter remains the same for both coordinates that must mean it is a vertical ship
   if (letter1 == letter2)
   {
     vertical = true;
@@ -147,6 +153,7 @@ void Player::markBoard(Ship ship)
     {
       for (int i = 0; i < ship.getLength(); i++)
       {
+        //places the correct ship type
         if (ship.getName() == "battleship")
         {
           m_ship_board.changepointat(coord1, 'B');
@@ -167,10 +174,10 @@ void Player::markBoard(Ship ship)
         {
           m_ship_board.changepointat(coord1, 'F');
         }                  
-        coord1.pop_back();
-        number1++;
-        std::string num = std::to_string(number1);
-        coord1 += num;
+        coord1.pop_back();                          //if coord1 before equaled A5, it is now just A
+        number1++;                                  //the number is now increased by one, so using the last comment's example, 5+1=6
+        std::string num = std::to_string(number1);  //the number is now converted to a string, so "6"
+        coord1 += num;                              //coord1 is now A6, as A is concatenated with 6
       }
     }
     else
@@ -197,7 +204,7 @@ void Player::markBoard(Ship ship)
         {
           m_ship_board.changepointat(coord2, 'F');
         }                  
-        coord2.pop_back();
+        coord2.pop_back();                          //same as the previous code but just with the letters
         number2++;
         std::string num = std::to_string(number2);
         coord2 += num;
@@ -230,7 +237,7 @@ void Player::markBoard(Ship ship)
         {
           m_ship_board.changepointat(coord1, 'F');
         }                     
-        letter1++;
+        letter1++;                      //same code as above for the letters
         coord1 = letter1;
         coord1 += number1_string;
       } 
@@ -259,7 +266,7 @@ void Player::markBoard(Ship ship)
         {
           m_ship_board.changepointat(coord2, 'F');
         }                     
-        letter2++;
+        letter2++;                  //same
         coord2 = letter2;
         coord2 += number1_string;    
       }  
@@ -281,6 +288,7 @@ void Player::placeShips(int number_ships, int player_number)
     m_player_number = "TWO";
   }
 
+  //prints out the board the user references to place their ships and the instructions
   m_ship_board.print();
   std::cout << "\nINSTRUCTIONS\n";
   std::cout << "To place a ship, type its starting coordinate as one word, hit space, and then type its last coordinate as one word.\n";
@@ -291,14 +299,16 @@ void Player::placeShips(int number_ships, int player_number)
   std::cout << "PLAYER " << m_player_number << ", ";
 
   //--------------------------------------------------------------------------------------------------------
+  //Five if statements depending on how many ships the players are playing with. This determines how many ships the
+  //users will be placing and what sizes they will be.
   if (number_ships == 1)
   {
     std::cout << "Where would you like to place your SIZE ONE frigate?: ";
     std::cin >> ship_coord1;
 		std::cin.clear();
-		std::cin.ignore(10000, '\n');    
-    ship_coord2 = ship_coord1;
-    while (!checkValidPlacement(ship_coord1, ship_coord2, 1))
+		std::cin.ignore(10000, '\n'); //this has to be cleared and ignored in case the user types two coordinates instead of one, so it flushes the stream   
+    ship_coord2 = ship_coord1;    //so that checkValidPlacement works correctly
+    while (!checkValidPlacement(ship_coord1, ship_coord2, 1)) //runs until a valid placement is made
     {
       std::cout << "That is not a valid placement, check how you typed it and the location and try again: ";
       std::cin >> ship_coord1;
@@ -306,11 +316,12 @@ void Player::placeShips(int number_ships, int player_number)
       std::cin.ignore(10000, '\n');       
       ship_coord2 = ship_coord1;
     }
-    Ship frigate(1, ship_coord1, ship_coord2, "frigate");
-    m_fs_remaining = 1;
-    markBoard(frigate);
+    Ship frigate(1, ship_coord1, ship_coord2, "frigate"); //creates the correct ship
+    m_fs_remaining = 1; //updates how many parts of it remain
+    markBoard(frigate); //marks it on the map
   }
   //--------------------------------------------------------------------------------------------------------
+  //the rest of the if statements are the same as above, just with more ships
   else if (number_ships == 2)
   {
     std::cout << "Where would you like to place your SIZE TWO destroyer?: ";
@@ -526,16 +537,16 @@ void Player::placeShips(int number_ships, int player_number)
     std::cout << "\nInvalid number of ships.\n";
     return;
   }
-  m_ships_remaining = number_ships;
+  m_ships_remaining = number_ships; //updates the ships remaining counter to however many ships the game is being played with
 }
 
 void Player::markShot(std::string shot, bool hit)
 {
-  if (hit)
+  if (hit)  //if the shot is a hit
   {
     m_shoot_board.changepointat(shot, 'X');
   }
-  else
+  else      //if it is a miss
   {
     m_shoot_board.changepointat(shot, '*');
   }
@@ -553,11 +564,11 @@ void Player::printShipBoard()
 
 bool Player::uniqueShot(std::string shot)
 {
-  if (m_shoot_board.getpointat(shot) == '*')
+  if (m_shoot_board.getpointat(shot) == '*') //if this coordinate has already been shot at and was a miss
   {
     return false;
   }
-  else if (m_shoot_board.getpointat(shot) == 'X')
+  else if (m_shoot_board.getpointat(shot) == 'X') //if already shot at and was a hit
   {
     return false;
   } 
@@ -566,15 +577,16 @@ bool Player::uniqueShot(std::string shot)
 
 bool Player::isHit(std::string shot)
 {
+  //if the player's ship was hit, it will enter the correct if statement depending on which type of ship was hit
   if (m_ship_board.getpointat(shot) == 'B')
   {
-    m_ship_board.changepointat(shot, 'X');
-    m_bs_remaining--; 
+    m_ship_board.changepointat(shot, 'X'); //updates it from a B to show its been hit 
+    m_bs_remaining--;                      //lowers how many B's remain on the board. When this hits 0, you know the ship has been sunk. 
     return true;
   }
   else if (m_ship_board.getpointat(shot) == 'C')
   {
-    m_ship_board.changepointat(shot, 'X');    
+    m_ship_board.changepointat(shot, 'X'); //same as above
     m_cs_remaining--;
     return true;
   }
@@ -601,10 +613,11 @@ bool Player::isHit(std::string shot)
 
 bool Player::isSunk(std::string shot)
 {
+  //if there are no more parts of a certain ship left un-hit, then it will be sunk.
   if (m_bs_remaining == 0)
   {
     m_bs_remaining = 100;
-    m_ships_remaining--;
+    m_ships_remaining--; //decrements the ships remaining counter since a ship has been sunk
     return true;
   }
   else if (m_cs_remaining == 0)

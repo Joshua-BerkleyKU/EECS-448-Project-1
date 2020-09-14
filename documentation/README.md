@@ -1,4 +1,4 @@
-# EECS-448-Project-1
+# README
 Group 15: Joshua Berkley, Tyler Rains, Darrin Ternes, Trey Werr
 
 --BATTLESHIP--

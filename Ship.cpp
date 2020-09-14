@@ -1,9 +1,3 @@
-/**
- * @author Trey Werr
- * @date 9/7
- * @brief Definitions for class Ship
- */
-
 #include "Ship.h"
 
 Ship::Ship(int length, std::string coord1, std::string coord2, std::string name) {
