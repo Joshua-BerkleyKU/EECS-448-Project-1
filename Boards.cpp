@@ -1,3 +1,10 @@
+
+/**
+* @author Joshua Berkley
+* @date 9/7
+* @brief Definitions for class Boards
+*/
+
 #include "Boards.h"
 
 Boards::Boards()

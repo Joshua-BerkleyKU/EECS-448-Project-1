@@ -1,3 +1,10 @@
+
+/**
+* @author Joshua Berkley
+* @date 9/7
+* @brief Header file for the Boards
+*/
+
 #ifndef BOARDS_H
 #define BOARDS_H
 #include <iostream>
@@ -20,17 +27,19 @@ class Boards
 	*/
 	  void print();
 
-    /** @pre a number for the row and column, the number be between 1 and 9.
+    /** @pre a string of the coords
 	*   @post returns a certan point on the board.
 	*/
     char getpointat(std::string coord);
 
-    /** @pre a number for the row and column, the number be between 1 and 9. also
-  *   a char to change the point on the board
+    /** @pre a string of the coords and a char to change the point on the board
 	*   @post changes a certan point on the board.
 	*/
     void changepointat(std::string coord, char newpoint);
 
+    /** @pre a string of the coords
+	*   @post returns a array of ints that represents the points on the board
+	*/
     int* stoiCoord(std::string coord);
 
   private:
