@@ -1,8 +1,9 @@
+
 /**
- * @author Joshua Berkley
- * @date 9/9
- * @brief Header file for the Board class.
- */
+* @author Joshua Berkley
+* @date 9/7
+* @brief Header file for the Boards
+*/
 
 #ifndef BOARDS_H
 #define BOARDS_H
@@ -46,6 +47,7 @@ class Boards
 	 *  @param coord A string containing the coordinates in two characters: a letter between A-I (column) and a number between 1-9 (row).
 	 *  @returns An array (size 2) of integers with the coordinates inside.
 	 */
+
     int* stoiCoord(std::string coord);
 
   private:
